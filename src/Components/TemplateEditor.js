@@ -1,10 +1,6 @@
 import React, { Component } from 'react'
-import { GithubPicker, SliderPicker } from 'react-color'
+import { SliderPicker } from 'react-color'
 export default class TemplateEditor extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   render() {
     return (
       <div className='text-2xl text-white flex flex-col items-center py-10 lg:absolute top-2 right-4'>

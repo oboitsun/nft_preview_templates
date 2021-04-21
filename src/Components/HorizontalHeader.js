@@ -8,7 +8,7 @@ export default class HorizontalHeader extends Component {
     return (
       <div
         style={{ background: this.props.background, color: this.props.textColor }}
-        className='w-full sm:py-12 sm:px-10 flex justify-between items-center  '>
+        className='w-full sm:py-12 sm:px-10 flex justify-between items-center '>
         <div className='w-16 h-16 rounded-full bg-red-400 sm:mr-5'></div>
         <div className='flex flex-col items-start mr-auto'>
           <span className='text-2xl leading-none'>Olive Allen</span>
