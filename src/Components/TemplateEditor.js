@@ -1,17 +1,24 @@
 import React, { Component } from 'react'
-import { SliderPicker } from 'react-color'
+import { ChromePicker, SliderPicker } from 'react-color'
+import ColorPicker from './ColorPicker'
+import PatternLibrary from './PatternLibrary'
 export default class TemplateEditor extends Component {
   render() {
+    console.log(this.props.state)
     return (
-      <div className='text-2xl text-white flex flex-col items-center py-10 lg:absolute top-2 right-4'>
-        <h3 className=''>Border Color:</h3>
-        <div className='w-80 p-4 bg-gray-50 rounded-2xl border border-gray-600'>
-          <SliderPicker
-            className='w-full h-auto'
-            color={this.props.state.border.color}
-            onChangeComplete={this.props.changeBorderColor}
-          />
+      <div className='text-2xl  text-white flex flex-col items-center py-10 lg:absolute top-2 right-4'>
+        <div className='h-5 w-full'>
+          {this.props.state.history.length > 0 ? (
+            <div onClick={this.props.stepBack}>step back</div>
+          ) : (
+            ''
+          )}
         </div>
+        <ColorPicker
+          name='Border Color'
+          function={this.props.changeBorderColor}
+          currentState={this.props.state.border.color}
+        />
         <label htmlFor='borderWidth'>Border Width:</label>
         <input
           name='borderWidth'
@@ -23,87 +30,28 @@ export default class TemplateEditor extends Component {
           min='0'
           max='10'
         />
-        <h3 className=''>Header text color:</h3>
-        <div className='w-80 p-4 bg-gray-50 rounded-2xl border border-gray-600'>
-          <SliderPicker
-            className='w-full h-auto'
-            color={this.props.state.headerTextColor}
-            onChangeComplete={this.props.changeHeaderTextColor}
-          />
-        </div>
-        <h3 className=''>Header background:</h3>
-        <div className='w-80 p-4 bg-gray-50 rounded-2xl border border-gray-600'>
-          <SliderPicker
-            className='w-full h-auto'
-            color={this.props.state.headerBackground}
-            onChangeComplete={(color) => {
-              this.props.changeHeaderBackground(color, false)
-            }}
-          />
-        </div>
-        <h3 className=''>Footer text color:</h3>
-        <div className='w-80 p-4 bg-gray-50 rounded-2xl border border-gray-600'>
-          <SliderPicker
-            className='w-full h-auto'
-            color={this.props.state.footerTextColor}
-            onChangeComplete={this.props.changeFooterTextColor}
-          />
-        </div>
-        <h3 className=''>Footer background:</h3>
-        <div className='w-80 p-4 bg-gray-50 rounded-2xl border border-gray-600'>
-          <SliderPicker
-            className='w-full h-auto'
-            color={this.props.state.footerBackground}
-            onChangeComplete={this.props.changeFooterBackground}
-          />
-        </div>
-        <label htmlFor='borderWidth'>Button border Width:</label>
-        <input
-          name='borderWidth'
-          className='rounded-lg overflow-hidden appearance-none bg-gray-400 h-3 w-128'
-          onChange={this.props.changeButtonBorderWidth}
-          defaultValue='0'
-          step='1'
-          type='range'
-          min='0'
-          max='10'
+        <ColorPicker
+          name='Header Background'
+          function={this.props.changeHeaderBackground}
+          currentState={this.props.state.headerBackground}
         />
-        <h3 className=''>Button background:</h3>
-        <div className='w-80 p-4 bg-gray-50 rounded-2xl border border-gray-600'>
-          <SliderPicker
-            className='w-full h-auto'
-            color={this.props.state.button.background}
-            onChangeComplete={this.props.changeButtonBack}
-          />
-        </div>
-        <h3 className=''>Button border background:</h3>
-        <div className='w-80 p-4 bg-gray-50 rounded-2xl border border-gray-600'>
-          <SliderPicker
-            className='w-full h-auto'
-            color={this.props.state.button.borderColor}
-            onChangeComplete={this.props.changeButtonBorderColor}
-          />
-        </div>
-        <h3 className=''>Button text color:</h3>
-        <div className='w-80 p-4 bg-gray-50 rounded-2xl border border-gray-600'>
-          <SliderPicker
-            className='w-full h-auto'
-            color={this.props.state.button.textColor}
-            onChangeComplete={this.props.changeButtonTextColor}
-          />
-        </div>
-        <h3> Header pattern:</h3>
-        <div>
-          <button
-            onClick={(event) => {
-              this.props.changeHeaderBackground(event.target.style.background, true)
-            }}
-            style={{
-              opacity: 1,
-              background: `repeating-linear-gradient( 45deg, #919191, #919191 4.5px, ${this.props.state.headerBackground} 4.5px, ${this.props.state.headerBackground} 22.5px )`,
-            }}
-            className='w-10 h-10 rounded'></button>
-        </div>
+        <ColorPicker
+          name='Footer Background'
+          function={this.props.changeFooterBackground}
+          currentState={this.props.state.footerBackground}
+        />
+        <ColorPicker
+          name='Button Background'
+          currentState={this.props.state.button.background}
+          function={this.props.changeButtonBack}
+        />
+        {/* <ColorPicker
+          name='Button Border Color'
+          function={this.props.changeButtonBorderColor}
+          currentState={this.props.state.button.borderColor}
+        /> */}
+        {/* <h3> Header pattern:</h3> */}
+        {/* <PatternLibrary currentBackground={this.props.state.headerBackground} function={} /> */}
       </div>
     )
   }

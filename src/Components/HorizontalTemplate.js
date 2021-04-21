@@ -6,10 +6,12 @@ import TemplateEditor from './TemplateEditor'
 export default class HorizontalTemplate extends Component {
   constructor(props) {
     super(props)
+
     this.state = {
+      history: [],
       fontFamily: 'Barlow',
-      headerTextColor: '#408ce0',
-      footerTextColor: '#408ce0',
+      headerTextColor: 'black',
+      footerTextColor: this.headerTextColor,
       headerBackground: 'turquoise',
       footerBackground: 'yellow',
       border: {
@@ -21,61 +23,72 @@ export default class HorizontalTemplate extends Component {
         border: true,
         borderColor: '#408ce0',
         borderWidth: '1px',
-        textColor: '#6940e0',
+        textColor: this.headerTextColor,
       },
     }
   }
-  chageFontFamily = () => {
-    this.setState({ ...this.state, fontFamily: 'sans-serif' })
+  saveEditingStep = (whatChanged, changes) => {
+    this.setState({
+      ...this.state,
+      history: [...this.state.history, { [whatChanged]: changes }],
+    })
+  }
+  undoHistoryStep = () => {
+    console.log('whoop')
+
+    const lastStep = this.state.history[this.state.history.length - 1]
+    const newHistory = [...this.state.history]
+    newHistory.pop()
+    console.log(lastStep, newHistory)
+    this.setState({ ...this.state, ...lastStep, history: newHistory })
   }
 
   changeBorderWidth = (event) => {
     this.setState({
       ...this.state,
       border: { ...this.state.border, width: event.target.value },
+      history: [...this.state.history, { border: { ...this.state.border } }],
     })
+    // this.saveEditingStep('border', { ...this.state.border, width: event.target.value })
   }
-  changeBorderColor = (color) => {
-    this.setState({ ...this.state, border: { ...this.state.border, color: color.hex } })
-  }
-  changeButtonBorderWidth = (event) => {
+  changeHeaderBackground = (color) => {
     this.setState({
       ...this.state,
-      button: { ...this.state.button, borderWidth: `${event.target.value}px` },
+      headerBackground: color.hex,
+      history: [...this.state.history, { headerBackground: this.state.headerBackground }],
     })
+    // this.saveEditingStep('headerBackground', color.hex)
   }
-  changeButtonBorderColor = (color) => {
-    this.setState({ ...this.state, button: { ...this.state.button, borderColor: color.hex } })
+
+  changeFooterBackground = (color) => {
+    this.setState({
+      ...this.state,
+      footerBackground: color.hex,
+      history: [...this.state.history, { footerBackground: this.state.footerBackground }],
+    })
+    // this.saveEditingStep('footerBackground', color.hex)
   }
+  changeBorderColor = (color) => {
+    this.setState({
+      ...this.state,
+      border: { ...this.state.border, color: color.hex },
+      history: [...this.state.history, { border: { ...this.state.border } }],
+    })
+    // this.saveEditingStep('border', { ...this.state.border, color: color.hex })
+  }
+  // changeButtonBorderColor = (color) => {
+  //   this.setState({ ...this.state, button: { ...this.state.button, borderColor: color.hex } })
+  // }
   changeButtonBack = (color) => {
-    this.setState({ ...this.state, button: { ...this.state.button, background: color.hex } })
-  }
-  changeButtonTextColor = (color) => {
-    console.log(color)
-    this.setState({ ...this.state, button: { ...this.state.button, textColor: color.hex } })
-  }
-  changeHeaderTextColor = (color) => {
-    this.setState({ ...this.state, headerTextColor: color.hex })
-  }
-  changeHeaderBackground = (color, pattern = false) => {
-    console.log(color)
-    if (pattern) {
-      console.log(pattern)
-      return this.setState({ ...this.state, headerBackground: color })
-    }
-    if (!pattern) {
-      return this.setState({ ...this.state, headerBackground: color.hex })
-    }
-  }
-  changeFooterTextColor = (color) => {
-    this.setState({ ...this.state, footerTextColor: color.hex })
-  }
-  changeFooterBackground = (color, props) => {
-    this.setState({ ...this.state, footerBackground: color.hex })
+    this.setState({
+      ...this.state,
+      button: { ...this.state.button, background: color.hex },
+      history: [...this.state.history, { button: { ...this.state.button } }],
+    })
+    // this.saveEditingStep('button', { ...this.state.button, background: color.hex })
   }
 
   render() {
-    console.log(this.state.border.width)
     /*horiz-templ is a custom selector put in index */
     return (
       <>
@@ -99,6 +112,8 @@ export default class HorizontalTemplate extends Component {
         </div>
         <TemplateEditor
           state={this.state}
+          saveEditingStep={this.saveEditingStep}
+          stepBack={this.undoHistoryStep}
           changeHeaderTextColor={this.changeHeaderTextColor}
           changeHeaderBackground={this.changeHeaderBackground}
           changeBorderColor={this.changeBorderColor}

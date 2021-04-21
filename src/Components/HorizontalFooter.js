@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import TimeLeft from './icons/timeLeft'
 export default class HorizontalFooter extends Component {
-  constructor(props) {
-    super(props)
-  }
   render() {
     return (
       <div
