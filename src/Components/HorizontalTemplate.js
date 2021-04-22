@@ -11,8 +11,14 @@ export default class HorizontalTemplate extends Component {
       history: [],
       fontFamily: 'Barlow',
       headerTextColor: 'black',
-      footerTextColor: this.headerTextColor,
       headerBackground: 'turquoise',
+      headerPattern: 'flat',
+      headerPatternColor: 'white',
+      headerBorderRadius: 20,
+      footerTextColor: this.headerTextColor,
+      footerPattern: 'flat',
+      footerPatternColor: 'white',
+      footerBorderRadius: 0,
       footerBackground: 'yellow',
       border: {
         color: 'green',
@@ -27,6 +33,7 @@ export default class HorizontalTemplate extends Component {
       },
     }
   }
+
   saveEditingStep = (whatChanged, changes) => {
     this.setState({
       ...this.state,
@@ -34,12 +41,9 @@ export default class HorizontalTemplate extends Component {
     })
   }
   undoHistoryStep = () => {
-    console.log('whoop')
-
     const lastStep = this.state.history[this.state.history.length - 1]
     const newHistory = [...this.state.history]
     newHistory.pop()
-    console.log(lastStep, newHistory)
     this.setState({ ...this.state, ...lastStep, history: newHistory })
   }
 
@@ -49,7 +53,13 @@ export default class HorizontalTemplate extends Component {
       border: { ...this.state.border, width: event.target.value },
       history: [...this.state.history, { border: { ...this.state.border } }],
     })
-    // this.saveEditingStep('border', { ...this.state.border, width: event.target.value })
+  }
+  changeHeaderBorderRadius = (event) => {
+    this.setState({
+      ...this.state,
+      headerBorderRadius: event.target.value,
+      history: [...this.state.history, { headerBorderRadius: this.state.headerBorderRadius }],
+    })
   }
   changeHeaderBackground = (color) => {
     this.setState({
@@ -57,16 +67,20 @@ export default class HorizontalTemplate extends Component {
       headerBackground: color.hex,
       history: [...this.state.history, { headerBackground: this.state.headerBackground }],
     })
-    // this.saveEditingStep('headerBackground', color.hex)
   }
-
+  changeFooterBorderRadius = (event) => {
+    this.setState({
+      ...this.state,
+      footerBorderRadius: event.target.value,
+      history: [...this.state.history, { footerBorderRadius: this.state.footerBorderRadius }],
+    })
+  }
   changeFooterBackground = (color) => {
     this.setState({
       ...this.state,
       footerBackground: color.hex,
       history: [...this.state.history, { footerBackground: this.state.footerBackground }],
     })
-    // this.saveEditingStep('footerBackground', color.hex)
   }
   changeBorderColor = (color) => {
     this.setState({
@@ -74,20 +88,42 @@ export default class HorizontalTemplate extends Component {
       border: { ...this.state.border, color: color.hex },
       history: [...this.state.history, { border: { ...this.state.border } }],
     })
-    // this.saveEditingStep('border', { ...this.state.border, color: color.hex })
   }
-  // changeButtonBorderColor = (color) => {
-  //   this.setState({ ...this.state, button: { ...this.state.button, borderColor: color.hex } })
-  // }
   changeButtonBack = (color) => {
     this.setState({
       ...this.state,
       button: { ...this.state.button, background: color.hex },
       history: [...this.state.history, { button: { ...this.state.button } }],
     })
-    // this.saveEditingStep('button', { ...this.state.button, background: color.hex })
   }
-
+  changeHeaderPattern = (pattern) => {
+    this.setState({
+      ...this.state,
+      headerPattern: pattern,
+      history: [...this.state.history, { headerPattern: this.state.headerPattern }],
+    })
+  }
+  changeHeaderPatternColor = (color) => {
+    this.setState({
+      ...this.state,
+      headerPatternColor: color.hex,
+      history: [...this.state.history, { headerPatternColor: this.state.headerPatternColor }],
+    })
+  }
+  changeFooterPattern = (pattern) => {
+    this.setState({
+      ...this.state,
+      footerPattern: pattern,
+      history: [...this.state.history, { footerPattern: this.state.footerPattern }],
+    })
+  }
+  changeFooterPatternColor = (color) => {
+    this.setState({
+      ...this.state,
+      footerPatternColor: color.hex,
+      history: [...this.state.history, { footerPatternColor: this.state.footerPatternColor }],
+    })
+  }
   render() {
     /*horiz-templ is a custom selector put in index */
     return (
@@ -100,11 +136,17 @@ export default class HorizontalTemplate extends Component {
             border: `${this.state.border.width}px solid ${this.state.border.color} `,
           }}>
           <HorizontalHeader
+            headerBorderRadius={this.state.headerBorderRadius}
+            headerPatternColor={this.state.headerPatternColor}
+            headerPattern={this.state.headerPattern}
             textColor={this.state.headerTextColor}
             background={this.state.headerBackground}
           />
           <section className='w-full h-96 flex flex-grow bg-gray-700 '></section>
           <HorizontalFooter
+            footerBorderRadius={this.state.footerBorderRadius}
+            footerPatternColor={this.state.footerPatternColor}
+            footerPattern={this.state.footerPattern}
             button={this.state.button}
             textColor={this.state.footerTextColor}
             background={this.state.footerBackground}
@@ -114,16 +156,17 @@ export default class HorizontalTemplate extends Component {
           state={this.state}
           saveEditingStep={this.saveEditingStep}
           stepBack={this.undoHistoryStep}
-          changeHeaderTextColor={this.changeHeaderTextColor}
+          changeHeaderBorderRadius={this.changeHeaderBorderRadius}
+          changeFooterBorderRadius={this.changeFooterBorderRadius}
           changeHeaderBackground={this.changeHeaderBackground}
+          changeHeaderPattern={this.changeHeaderPattern}
+          changeHeaderPatternColor={this.changeHeaderPatternColor}
           changeBorderColor={this.changeBorderColor}
           changeBorderWidth={this.changeBorderWidth}
           changeFooterBackground={this.changeFooterBackground}
-          changeFooterTextColor={this.changeFooterTextColor}
-          changeButtonBorderWidth={this.changeButtonBorderWidth}
-          changeButtonBorderColor={this.changeButtonBorderColor}
+          changeFooterPattern={this.changeFooterPattern}
+          changeFooterPatternColor={this.changeFooterPatternColor}
           changeButtonBack={this.changeButtonBack}
-          changeButtonTextColor={this.changeButtonTextColor}
         />
       </>
     )

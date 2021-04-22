@@ -8,7 +8,7 @@ export default function TimeLeft() {
       </defs>
       <g id='Layer_2' dataname='Layer 2'>
         <g id='Layer_2-2' dataname='Layer 2'>
-          <circle stroke='current' className='cls-1' cx='16.5' cy='16.5' r='16' />
+          <circle stroke='black' className='cls-1' cx='16.5' cy='16.5' r='16' />
           <path fill='current' className='cls-2' d='M16.5,3.7V16.5H3.7A12.8,12.8,0,1,0,16.5,3.7Z' />
         </g>
       </g>
