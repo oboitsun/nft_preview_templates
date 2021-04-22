@@ -32,25 +32,27 @@ export default class HorizontalFooter extends Component {
           borderBottomLeftRadius: `${this.props.footerBorderRadius}px`,
           borderBottomRightRadius: `${this.props.footerBorderRadius}px`,
         }}
-        className='w-full  lg:px-14 lg:py-10 flex justify-between rounded-b-md relative z-10'>
+        className='w-full p-2  lg:px-14 lg:py-10 flex justify-between rounded-b-md relative z-10'>
         <div className='flex flex-col justify-between z-10'>
           <div className='flex flex-col items-start mb-4'>
-            <span className='font-semibold uppercase text-xl leading-none'>Category:</span>
-            <span className='lowercase tracking-wide text-3xl leading-none'>sports</span>
+            <span className='font-semibold uppercase lg:text-xl leading-none'>Category:</span>
+            <span className='lowercase tracking-wide lg:text-3xl leading-none'>sports</span>
           </div>
           <div className='flex flex-col items-start'>
-            <span className='font-semibold uppercase text-xl'>highest bid:</span>
-            <span className='lowercase tracking-wide text-3xl leading-none'>$3000</span>
+            <span className='text-left font-semibold uppercase lg:text-xl'>highest bid:</span>
+            <span className='lowercase tracking-wide lg:text-3xl leading-none'>$3000</span>
           </div>
         </div>
         <div className='flex flex-col justify-between z-10'>
           <div className='flex flex-col items-start '>
-            <span className='font-semibold uppercase text-xl leading-none'>series number:</span>
-            <span className='lowercase tracking-wide text-3xl'>1 of 24</span>
+            <span className='text-left font-semibold uppercase lg:text-xl leading-none'>
+              series number:
+            </span>
+            <span className='lowercase tracking-wide lg:text-3xl'>1 of 24</span>
           </div>
           <div className='flex flex-col items-start'>
-            <span className='text-2xl tracking-tighter flex items-center'>
-              <span className='w-8 h-8 mr-1'>
+            <span className='lg:text-2xl tracking-tighter flex items-center'>
+              <span className='w-4 h-4 lg:w-8 lg:h-8 mr-1'>
                 <TimeLeft />
               </span>
               33 minutes left
@@ -59,7 +61,7 @@ export default class HorizontalFooter extends Component {
         </div>
         <div className='flex flex-col justify-between  items-end z-10'>
           <div className='flex items-center justify-end'>
-            <Star /> <span className='ml-2 font-semibold text-xl'>@</span>
+            <Star /> <span className='ml-2 font-semibold lg:text-xl'>@</span>
           </div>
           <button
             style={{
@@ -70,7 +72,7 @@ export default class HorizontalFooter extends Component {
                 ? `${this.props.button.borderWidth} solid ${this.props.button.borderColor}`
                 : 'none',
             }}
-            className='uppercase outline-none border rounded-lg border-gray-900 py-5 px-10 font-semibold leading-none'>
+            className='uppercase outline-none border rounded-lg border-gray-900 py-2 px-4 lg:py-5 lg:px-10 font-semibold leading-none'>
             go to auction
           </button>
         </div>

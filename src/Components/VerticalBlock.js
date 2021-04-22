@@ -33,27 +33,27 @@ export default class VerticalBlock extends Component {
           borderTopRightRadius: `${this.props.headerBorderRadius}px`,
           borderBottomRightRadius: `${this.props.headerBorderRadius}px`,
         }}
-        className='w-full h-full  flex  justify-between items-center relative overflow-hidden '>
-        <div
-          style={{ background: this.props.sideBackground }}
-          className='absolute top-0 left-0 h-full w-24 bg-red-900'></div>
-        <section className='vertical-ratio w-1/2 flex flex-grow bg-gray-700 ml-10 mr-10 z-10'>
+        className='vertical-template   flex justify-between  relative overflow-hidden '>
+        <div style={{ background: this.props.sideBackground }} className='h-full w-1/12'></div>
+        <section className='vertical-ratio w-1/12 xl:w-12 flex mr-auto flex-shrink  bg-gray-700  z-10'>
           <iframe
             className='absolute top-0 w-full h-full '
             src='https://www.youtube.com/embed/tCCY31XxN_Y'
             frameBorder='0'
             allowFullScreen=''></iframe>
         </section>
-        <div className='w-1/2 h-full z-10  flex flex-col  justify-between ml-2 sm:py-12 pr-2 sm:pr-5 lg:pr-10'>
-          <div className='flex items-center'>
-            <div className='w-10 h-10 rounded-full bg-red-400 sm:mr-5 z-10 flex-shrink-0'></div>
-            <div className='flex flex-col items-start justify-between mr-auto z-10'>
-              <span className='text-2xl leading-none mix-blend-difference'>Olive Allen</span>
-              <span className='text-3xl text-left leading-none'>“A piece of Something”</span>
+        <div className='h-full z-10 w-1/2 flex flex-col items-start justify-between relative pl-2 2xl:pl-10 py-2 sm:py-12 '>
+          <div className='flex items-center '>
+            <div className='w-5 h-5 lg:w-10 lg:h-10 rounded-full bg-red-400 mr-1 lg:mr-2 2xl:mr-5 z-10 flex-shrink-0'></div>
+            <div className='flex flex-col flex-wrap items-start justify-between mr-auto  z-10 pb-1'>
+              <span className=' 2xl:text-2xl leading-none mix-blend-difference'>Olive Allen</span>
+              <p className='max-w-xs text-base lg:text-xl 2xl:text-3xl text-left leading-none flex flex-wrap overflow-ellipsis'>
+                “A piece of Something”
+              </p>
             </div>
           </div>
           <div className='flex items-center  z-10'>
-            <span className='w-6 h-5 mr-1 fill-current'>
+            <span className='w-3 h-2 lg:w-6 lg:h-5 mr-1 fill-current'>
               <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22.83 19.45'>
                 <g id='Layer_2' data-name='Layer 2'>
                   <g id='Layer_2-2' data-name='Layer 2'>
@@ -62,26 +62,28 @@ export default class VerticalBlock extends Component {
                 </g>
               </svg>
             </span>
-            <span className='sm:text-2xl'>40</span>
+            <span className='lg:text-2xl'>40</span>
           </div>
           <div className='flex flex-col justify-between z-10'>
             <div className='flex flex-col items-start mb-4'>
-              <span className='font-semibold uppercase text-xl leading-none'>Category:</span>
-              <span className='lowercase tracking-wide text-3xl leading-none'>sports</span>
+              <span className='lg:font-semibold uppercase lg:text-xl leading-none'>Category:</span>
+              <span className='lowercase tracking-wide lg:text-3xl leading-none'>sports</span>
             </div>
             <div className='flex flex-col items-start mb-4'>
-              <span className='font-semibold uppercase text-xl'>highest bid:</span>
-              <span className='lowercase tracking-wide text-3xl leading-none'>$3000</span>
+              <span className='lg:font-semibold uppercase lg:text-xl'>highest bid:</span>
+              <span className='lowercase tracking-wide lg:text-3xl leading-none'>$3000</span>
             </div>
             <div className='flex flex-col items-start '>
-              <span className='font-semibold uppercase text-xl leading-none'>series number:</span>
-              <span className='lowercase tracking-wide text-3xl'>1 of 24</span>
+              <span className='lg:font-semibold uppercase lg:text-xl leading-none'>
+                series number:
+              </span>
+              <span className='lowercase tracking-wide lg:text-xl 2xl:text-3xl'>1 of 24</span>
             </div>
           </div>
 
           <div className='flex flex-col items-start'>
-            <span className='text-2xl tracking-tighter flex items-center mb-4'>
-              <span className='w-8 h-8 mr-1'>
+            <span className=' lg:text-xl 2xl:text-2xl tracking-tighter flex items-center mb-4'>
+              <span className='w-4 h-4 lg:w-8 lg:h-8 mr-1'>
                 <TimeLeft />
               </span>
               33 minutes left
@@ -95,11 +97,11 @@ export default class VerticalBlock extends Component {
                   ? `${this.props.button.borderWidth} solid ${this.props.button.borderColor}`
                   : 'none',
               }}
-              className='uppercase outline-none border rounded-lg border-gray-900 py-5 px-10 font-semibold leading-none mb-2'>
+              className='uppercase outline-none border rounded-lg border-gray-900 py-1 px-3 2xl:py-5 2xl:px-10 tex-sm 2xl:text-base lg:font-semibold leading-none  mb-1 lg:mb-2'>
               go to auction
             </button>
             <div className='flex items-center justify-end'>
-              <Star /> <span className='ml-2 font-semibold text-xl'>@</span>
+              <Star /> <span className='ml-2 font-semibold lg:text-xl'>@</span>
             </div>
           </div>
         </div>

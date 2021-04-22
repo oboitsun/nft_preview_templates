@@ -256,7 +256,7 @@ export default class HorizontalTemplate extends Component {
         )}
         {this.state.vertical && (
           <div
-            className='mx-auto w-1/2 horiz-templ flex rounded-2xl flex-col p-0 overflow-hidden'
+            className='vertical-template mx-auto h-auto max-h-full flex rounded-2xl flex-col p-0 overflow-hidden'
             style={{
               backgroundColor: this.state.border.color,
               fontFamily: this.state.fontFamily,
