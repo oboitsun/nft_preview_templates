@@ -53,7 +53,7 @@ export default class TemplateEditor extends Component {
           function={this.props.changeHeaderBackground}
           currentState={this.props.state.headerBackground}
         />
-        <label htmlFor='borderWidth'>Header border Radius:</label>
+        <label htmlFor='borderWidth'> Border Radius:</label>
         <input
           name='borderWidth'
           className='rounded-lg overflow-hidden appearance-none bg-gray-400 h-3 w-128 mt-1'
@@ -83,7 +83,7 @@ export default class TemplateEditor extends Component {
           currentState={this.props.state.footerBackground}
         />
 
-        {!this.props.state.vertical && (
+        {false && !this.props.state.vertical && (
           <>
             <label htmlFor='borderWidth'>Footer border Radius:</label>
             <input

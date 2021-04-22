@@ -220,33 +220,38 @@ export default class HorizontalTemplate extends Component {
     return (
       <div className='w-full h-full flex flex-col lg:flex-row'>
         {!this.state.vertical && (
-          <div
-            className='mx-auto w-1/2 horiz-templ flex rounded-2xl flex-col p-0 overflow-hidden mb-10'
-            style={{
-              backgroundColor: this.state.border.color,
-              fontFamily: this.state.fontFamily,
-              border: `${this.state.border.width}px solid ${this.state.border.color} `,
-            }}>
-            <HorizontalHeader
-              headerBorderRadius={this.state.headerBorderRadius}
-              headerPatternColor={this.state.headerPatternColor}
-              headerPattern={this.state.headerPattern}
-              textColor={this.state.headerTextColor}
-              background={this.state.headerBackground}
-            />
-            <section className='horizontal-ratio w-full  flex flex-grow bg-gray-700 '>
-              <div className='absolute top-0 w-full h-full bg-red-400 uppercase text-3xl flex justify-center items-center'>
-                put your video here
-              </div>
-            </section>
-            <HorizontalFooter
-              footerBorderRadius={this.state.footerBorderRadius}
-              footerPatternColor={this.state.footerPatternColor}
-              footerPattern={this.state.footerPattern}
-              button={this.state.button}
-              textColor={this.state.footerTextColor}
-              background={this.state.footerBackground}
-            />
+          <div className='w-full relative rounded-2xl overflow-hidden'>
+            <div
+              className='mx-auto  horizontal-template  flex rounded-2xl flex-col p-0 overflow-hidden mb-10'
+              style={{
+                backgroundColor: this.state.border.color,
+                fontFamily: this.state.fontFamily,
+                border: `${this.state.border.width}px solid ${this.state.border.color} `,
+              }}>
+              <HorizontalHeader
+                headerBorderRadius={this.state.headerBorderRadius}
+                headerPatternColor={this.state.headerPatternColor}
+                headerPattern={this.state.headerPattern}
+                textColor={this.state.headerTextColor}
+                background={this.state.headerBackground}
+              />
+              <section className='horizontal-ratio w-full  flex flex-grow bg-gray-700 '>
+                <iframe
+                  className='absolute top-0 w-full h-full border-none'
+                  src='https://www.youtube.com/embed/KS9fsToCwWo'
+                  frameBorder='0'
+                  allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+                  allowFullScreen></iframe>
+              </section>
+              <HorizontalFooter
+                footerBorderRadius={this.state.headerBorderRadius}
+                footerPatternColor={this.state.footerPatternColor}
+                footerPattern={this.state.footerPattern}
+                button={this.state.button}
+                textColor={this.state.footerTextColor}
+                background={this.state.footerBackground}
+              />
+            </div>
           </div>
         )}
         {this.state.vertical && (

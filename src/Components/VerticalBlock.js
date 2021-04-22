@@ -37,10 +37,12 @@ export default class VerticalBlock extends Component {
         <div
           style={{ background: this.props.sideBackground }}
           className='absolute top-0 left-0 h-full w-24 bg-red-900'></div>
-        <section className='vertical-ratio w-1/2 flex flex-grow bg-gray-700 ml-10 mr-10'>
-          <div className='absolute top-0 w-full h-full bg-red-400 uppercase text-3xl flex justify-center items-center'>
-            put your video here
-          </div>
+        <section className='vertical-ratio w-1/2 flex flex-grow bg-gray-700 ml-10 mr-10 z-10'>
+          <iframe
+            className='absolute top-0 w-full h-full '
+            src='https://www.youtube.com/embed/tCCY31XxN_Y'
+            frameBorder='0'
+            allowFullScreen=''></iframe>
         </section>
         <div className='w-1/2 h-full z-10  flex flex-col  justify-between ml-2 sm:py-12 pr-2 sm:pr-5 lg:pr-10'>
           <div className='flex items-center'>
