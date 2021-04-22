@@ -9,35 +9,7 @@ export default class HorizontalTemplate extends Component {
     super(props)
 
     this.state = {
-      history: [
-        {
-          vertical: false,
-          stepsBack: 0,
-          fontFamily: 'Barlow',
-          headerTextColor: 'black',
-          headerBackground: 'turquoise',
-          headerPattern: 'flat',
-          headerPatternColor: 'white',
-          headerBorderRadius: 2,
-          footerTextColor: this.headerTextColor,
-          footerPattern: 'flat',
-          footerPatternColor: 'white',
-          footerBorderRadius: 2,
-          footerBackground: 'yellow',
-          border: {
-            color: 'green',
-            width: 10,
-          },
-          button: {
-            background: 'turquoise',
-            border: true,
-            borderColor: '#408ce0',
-            borderWidth: '1px',
-            borderRadius: 2,
-            textColor: this.headerTextColor,
-          },
-        },
-      ],
+      history: [],
       vertical: false,
       stepsBack: 0,
       fontFamily: 'Barlow',
@@ -59,157 +31,188 @@ export default class HorizontalTemplate extends Component {
         background: 'turquoise',
         border: true,
         borderColor: '#408ce0',
-        borderWidth: '1px',
+        borderWidth: '5px',
         borderRadius: 2,
         textColor: this.headerTextColor,
       },
     }
   }
   changeTemplateType = () => {
-    const newHistory = [...this.state.history].slice(0, this.state.stepsBack + 1)
+    const newHistory = this.state.history
     this.setState({
       ...this.state,
       vertical: !this.state.vertical,
-      history: [...newHistory, { vertical: !this.state.vertical }],
+      history: [...this.state.history, { vertical: this.state.vertical }],
       stepsBack: 0,
     })
   }
-  saveEditingStep = (whatChanged, changes) => {
+
+  undoHistoryStep = () => {
+    const lastStep = this.state.history[this.state.history.length - 1]
+    const newHistory = [...this.state.history]
+    newHistory.pop()
+    let stepsBack = this.state.stepsBack
     this.setState({
       ...this.state,
-      history: [...this.state.history, { [whatChanged]: changes }],
+      history: newHistory,
+      ...lastStep,
+      stepsBack: stepsBack,
     })
   }
-  undoHistoryStep = () => {
-    const lastStep = this.state.history[this.state.history.length - (2 + this.state.stepsBack)]
-    // const newHistory = [...this.state.history]
-    // newHistory.pop()
-    let stepsBack = this.state.stepsBack
-    stepsBack++
-    this.setState({ ...this.state, ...lastStep, stepsBack: stepsBack })
-  }
   redoHistoryStep = () => {
-    let stepsBack = this.state.stepsBack
-    stepsBack--
-    const lastStep = this.state.history[this.state.history.length - this.state.stepsBack]
-    console.log(this.state.history[this.state.history.length - this.state.stepsBack])
-    this.setState({ ...this.state, ...lastStep, stepsBack: stepsBack })
+    // let stepsBack = this.state.stepsBack
+    // --stepsBack
+    // const lastStep = this.state.history[this.state.history.length - this.state.stepsBack]
+    // console.log(lastStep)
+    // this.setState({ ...this.state, ...lastStep, stepsBack: stepsBack })
   }
-  trimHistory = () => {
-    let stepsBack = this.state.stepsBack
-    console.log(stepsBack)
-    this.setState({ ...this.state, stepsBack: 0 })
-  }
+
   changeBorderWidth = (event) => {
-    const newHistory = [...this.state.history].slice(0, this.state.stepsBack + 1)
+    const newHistory = this.state.history
     this.setState({
       ...this.state,
       border: { ...this.state.border, width: event.target.value },
       stepsBack: 0,
-      history: [...newHistory, { border: { ...this.state.border, width: event.target.value } }],
+      history: [...this.state.history, { border: { ...this.state.border } }],
     })
   }
 
   changeBorderColor = (color) => {
-    const newHistory = [...this.state.history].slice(0, this.state.stepsBack + 1)
+    const newHistory = this.state.history
     this.setState({
       ...this.state,
       stepsBack: 0,
       border: { ...this.state.border, color: color.hex },
-      history: [...newHistory, { border: { ...this.state.border, color: color.hex } }],
+      history: [...this.state.history, { border: { ...this.state.border } }],
     })
   }
   changeHeaderBorderRadius = (event) => {
-    const newHistory = [...this.state.history].slice(0, this.state.stepsBack + 1)
+    /* const newHistory = this.state.history.slice(
+      0,
+      this.state.history.length - (this.state.stepsBack - 1)
+    ) */
     this.setState({
       ...this.state,
       stepsBack: 0,
       headerBorderRadius: event.target.value,
-      history: [...newHistory, { headerBorderRadius: event.target.value }],
+      history: [...this.state.history, { headerBorderRadius: this.state.headerBorderRadius }],
     })
   }
   changeHeaderBackground = (color) => {
-    const newHistory = [...this.state.history].slice(0, this.state.stepsBack + 1)
+    // const newHistory = this.state.history
     this.setState({
       ...this.state,
       stepsBack: 0,
       headerBackground: color.hex,
-      history: [...newHistory, { headerBackground: color.hex }],
+      history: [...this.state.history, { headerBackground: this.state.headerBackground }],
     })
   }
   changeHeaderPatternColor = (color) => {
-    const newHistory = [...this.state.history].slice(0, this.state.stepsBack + 1)
+    /* const newHistory = this.state.history.slice(
+      0,
+      this.state.history.length - (this.state.stepsBack - 1)
+    ) */
     this.setState({
       ...this.state,
       stepsBack: 0,
       headerPatternColor: color.hex,
-      history: [...newHistory, { headerPatternColor: color.hex }],
+      history: [...this.state.history, { headerPatternColor: this.state.headerPatternColor }],
     })
   }
   changeHeaderPattern = (pattern) => {
-    const newHistory = [...this.state.history].slice(0, this.state.stepsBack + 1)
+    /* const newHistory = this.state.history.slice(
+      0,
+      this.state.history.length - (this.state.stepsBack - 1)
+    ) */
     this.setState({
       ...this.state,
       stepsBack: 0,
       headerPattern: pattern,
-      history: [...newHistory, { headerPattern: pattern }],
+      history: [...this.state.history, { headerPattern: this.state.headerPattern }],
     })
   }
   changeFooterBackground = (color) => {
-    const newHistory = [...this.state.history].slice(0, this.state.stepsBack + 1)
+    /* const newHistory = this.state.history.slice(
+      0,
+      this.state.history.length - (this.state.stepsBack - 1)
+    ) */
     this.setState({
       ...this.state,
       stepsBack: 0,
       footerBackground: color.hex,
-      history: [...newHistory, { footerBackground: color.hex }],
+      history: [...this.state.history, { footerBackground: this.state.footerBackground }],
     })
   }
   changeFooterPattern = (pattern) => {
-    const newHistory = [...this.state.history].slice(0, this.state.stepsBack + 1)
+    /* const newHistory = this.state.history.slice(
+      0,
+      this.state.history.length - (this.state.stepsBack - 1)
+    ) */
     this.setState({
       ...this.state,
       stepsBack: 0,
       footerPattern: pattern,
-      history: [...newHistory, { footerPattern: pattern }],
+      history: [...this.state.history, { footerPattern: this.state.footerPattern }],
     })
   }
   changeFooterPatternColor = (color) => {
-    const newHistory = [...this.state.history].slice(0, this.state.stepsBack + 1)
+    /* const newHistory = this.state.history.slice(
+      0,
+      this.state.history.length - (this.state.stepsBack - 1)
+    ) */
     this.setState({
       ...this.state,
       stepsBack: 0,
       footerPatternColor: color.hex,
-      history: [...newHistory, { footerPatternColor: color.hex }],
+      history: [...this.state.history, { footerPatternColor: this.state.footerPatternColor }],
     })
   }
   changeFooterBorderRadius = (event) => {
-    const newHistory = [...this.state.history].slice(0, this.state.stepsBack + 1)
+    /* const newHistory = this.state.history.slice(
+      0,
+      this.state.history.length - (this.state.stepsBack - 1)
+    ) */
     this.setState({
       ...this.state,
       stepsBack: 0,
       footerBorderRadius: event.target.value,
-      history: [...newHistory, { footerBorderRadius: event.target.value }],
+      history: [...this.state.history, { footerBorderRadius: this.state.footerBorderRadius }],
     })
   }
   changeButtonBack = (color) => {
-    const newHistory = [...this.state.history].slice(0, this.state.stepsBack + 1)
+    /* const newHistory = this.state.history.slice(
+      0,
+      this.state.history.length - (this.state.stepsBack - 1)
+    ) */
     this.setState({
       ...this.state,
       stepsBack: 0,
       button: { ...this.state.button, background: color.hex },
-      history: [...newHistory, { button: { ...this.state.button, background: color.hex } }],
+      history: [...this.state.history, { button: { ...this.state.button } }],
+    })
+  }
+  changeButtonBorderColor = (color) => {
+    /* const newHistory = this.state.history.slice(
+      0,
+      this.state.history.length - (this.state.stepsBack - 1)
+    ) */
+    this.setState({
+      ...this.state,
+      stepsBack: 0,
+      button: { ...this.state.button, borderColor: color.hex },
+      history: [...this.state.history, { button: { ...this.state.button } }],
     })
   }
   changeButtonBorderRadius = (event) => {
-    const newHistory = [...this.state.history].slice(0, this.state.stepsBack + 1)
+    /* const newHistory = this.state.history.slice(
+      0,
+      this.state.history.length - (this.state.stepsBack - 1)
+    ) */
     this.setState({
       ...this.state,
       stepsBack: 0,
       button: { ...this.state.button, borderRadius: event.target.value },
-      history: [
-        ...newHistory,
-        { button: { ...this.state.button, borderRadius: event.target.value } },
-      ],
+      history: [...this.state.history, { button: { ...this.state.button } }],
     })
   }
   render() {
@@ -231,7 +234,11 @@ export default class HorizontalTemplate extends Component {
               textColor={this.state.headerTextColor}
               background={this.state.headerBackground}
             />
-            <section className='w-full h-96 flex flex-grow bg-gray-700 '></section>
+            <section className='horizontal-ratio w-full  flex flex-grow bg-gray-700 '>
+              <div className='absolute top-0 w-full h-full bg-red-400 uppercase text-3xl flex justify-center items-center'>
+                put your video here
+              </div>
+            </section>
             <HorizontalFooter
               footerBorderRadius={this.state.footerBorderRadius}
               footerPatternColor={this.state.footerPatternColor}
@@ -256,13 +263,13 @@ export default class HorizontalTemplate extends Component {
               headerPattern={this.state.headerPattern}
               textColor={this.state.headerTextColor}
               background={this.state.headerBackground}
+              sideBackground={this.state.footerBackground}
               button={this.state.button}
             />
           </div>
         )}
         <TemplateEditor
           state={this.state}
-          saveEditingStep={this.saveEditingStep}
           undoHistoryStep={this.undoHistoryStep}
           redoHistoryStep={this.redoHistoryStep}
           changeTemplateType={this.changeTemplateType}
@@ -277,6 +284,7 @@ export default class HorizontalTemplate extends Component {
           changeFooterPattern={this.changeFooterPattern}
           changeFooterPatternColor={this.changeFooterPatternColor}
           changeButtonBack={this.changeButtonBack}
+          changeButtonBorderColor={this.changeButtonBorderColor}
           changeButtonBorderRadius={this.changeButtonBorderRadius}
         />
       </div>

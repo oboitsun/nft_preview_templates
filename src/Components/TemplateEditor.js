@@ -3,17 +3,18 @@ import ColorPicker from './ColorPicker'
 import PatternLibrary from './PatternLibrary'
 export default class TemplateEditor extends Component {
   render() {
+    console.log('current state\n', this.props.state)
     return (
       <div className='text-2xl  text-white flex  flex-col items-center  px-10  top-2 right-4'>
         <div className='h-15 w-full flex mb-2'>
-          {this.props.state.history.length > this.props.state.stepsBack + 1 ? (
+          {this.props.state.history.length > 0 ? (
             <button
               className='w-1/2 px-4 py-2 rounded-full border focus:outline-none mr-1 '
               onClick={this.props.undoHistoryStep}>
               Undo
             </button>
           ) : (
-            <div className='h-12 w-full px-4 py-2  ' o></div>
+            <div className='h-12 w-full px-4 py-2  '></div>
           )}
           {this.props.state.stepsBack > 0 ? (
             <button
@@ -22,7 +23,7 @@ export default class TemplateEditor extends Component {
               Redo
             </button>
           ) : (
-            <div className='h-12 w-full px-4 py-2  ' o></div>
+            <div className='h-12 w-full px-4 py-2'></div>
           )}
         </div>
 
@@ -77,8 +78,7 @@ export default class TemplateEditor extends Component {
         />
 
         <ColorPicker
-          vertical={this.props.state.vertical}
-          name='Footer Background'
+          name={this.props.state.vertical ? 'Side Background' : 'Footer Background'}
           function={this.props.changeFooterBackground}
           currentState={this.props.state.footerBackground}
         />
@@ -119,6 +119,11 @@ export default class TemplateEditor extends Component {
           name='Button Background'
           currentState={this.props.state.button.background}
           function={this.props.changeButtonBack}
+        />
+        <ColorPicker
+          name='Button Border Color'
+          currentState={this.props.state.button.borderColor}
+          function={this.props.changeButtonBorderColor}
         />
         <>
           <label htmlFor='borderWidth'>Button border Radius:</label>
