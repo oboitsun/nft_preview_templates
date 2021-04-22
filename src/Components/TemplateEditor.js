@@ -5,12 +5,21 @@ export default class TemplateEditor extends Component {
   render() {
     return (
       <div className='text-2xl  text-white flex  flex-col items-center  px-10  top-2 right-4'>
-        <div className='h-15 w-full mb-2'>
-          {this.props.state.history.length > 0 ? (
+        <div className='h-15 w-full flex mb-2'>
+          {this.props.state.history.length > this.props.state.stepsBack + 1 ? (
             <button
-              className=' w-full px-4 py-2 rounded-full border focus:outline-none '
-              onClick={this.props.stepBack}>
-              step back
+              className='w-1/2 px-4 py-2 rounded-full border focus:outline-none mr-1 '
+              onClick={this.props.undoHistoryStep}>
+              Undo
+            </button>
+          ) : (
+            <div className='h-12 w-full px-4 py-2  ' o></div>
+          )}
+          {this.props.state.stepsBack > 0 ? (
+            <button
+              className='w-1/2 px-4 py-2 rounded-full border focus:outline-none mr-1 '
+              onClick={this.props.redoHistoryStep}>
+              Redo
             </button>
           ) : (
             <div className='h-12 w-full px-4 py-2  ' o></div>

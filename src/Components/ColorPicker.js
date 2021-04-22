@@ -12,7 +12,7 @@ export default class ColorPicker extends Component {
   }
   render() {
     return this.props.vertical ? (
-      ' '
+      <div></div>
     ) : (
       <div className='w-full flex-col flex items-center relative'>
         <h3 className=''>{this.props.name}:</h3>
