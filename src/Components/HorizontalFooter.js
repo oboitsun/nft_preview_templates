@@ -57,8 +57,8 @@ export default class HorizontalFooter extends Component {
             </span>
           </div>
         </div>
-        <div className='flex flex-col justify-between  z-10'>
-          <div className='flex items-center'>
+        <div className='flex flex-col justify-between  items-end z-10'>
+          <div className='flex items-center justify-end'>
             <Star /> <span className='ml-2 font-semibold text-xl'>@</span>
           </div>
           <button

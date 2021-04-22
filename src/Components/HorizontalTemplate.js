@@ -3,11 +3,13 @@ import '../styles/horizontal-template.css'
 import HorizontalHeader from './HorizontalHeader'
 import HorizontalFooter from './HorizontalFooter'
 import TemplateEditor from './TemplateEditor'
+import VerticalBlock from './VerticalBlock'
 export default class HorizontalTemplate extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
+      vertical: false,
       history: [],
       fontFamily: 'Barlow',
       headerTextColor: 'black',
@@ -33,7 +35,13 @@ export default class HorizontalTemplate extends Component {
       },
     }
   }
-
+  changeTemplateType = () => {
+    this.setState({
+      ...this.state,
+      vertical: !this.state.vertical,
+      history: [...this.state.history, { vertical: this.state.vertical }],
+    })
+  }
   saveEditingStep = (whatChanged, changes) => {
     this.setState({
       ...this.state,
@@ -128,32 +136,53 @@ export default class HorizontalTemplate extends Component {
     /*horiz-templ is a custom selector put in index */
     return (
       <>
-        <div
-          className='mx-auto w-1/2 horiz-templ flex rounded-2xl flex-col p-0 overflow-hidden'
-          style={{
-            backgroundColor: this.state.border.color,
-            fontFamily: this.state.fontFamily,
-            border: `${this.state.border.width}px solid ${this.state.border.color} `,
-          }}>
-          <HorizontalHeader
-            headerBorderRadius={this.state.headerBorderRadius}
-            headerPatternColor={this.state.headerPatternColor}
-            headerPattern={this.state.headerPattern}
-            textColor={this.state.headerTextColor}
-            background={this.state.headerBackground}
-          />
-          <section className='w-full h-96 flex flex-grow bg-gray-700 '></section>
-          <HorizontalFooter
-            footerBorderRadius={this.state.footerBorderRadius}
-            footerPatternColor={this.state.footerPatternColor}
-            footerPattern={this.state.footerPattern}
-            button={this.state.button}
-            textColor={this.state.footerTextColor}
-            background={this.state.footerBackground}
-          />
-        </div>
+        {!this.state.vertical && (
+          <div
+            className='mx-auto w-1/2 horiz-templ flex rounded-2xl flex-col p-0 overflow-hidden mb-10'
+            style={{
+              backgroundColor: this.state.border.color,
+              fontFamily: this.state.fontFamily,
+              border: `${this.state.border.width}px solid ${this.state.border.color} `,
+            }}>
+            <HorizontalHeader
+              headerBorderRadius={this.state.headerBorderRadius}
+              headerPatternColor={this.state.headerPatternColor}
+              headerPattern={this.state.headerPattern}
+              textColor={this.state.headerTextColor}
+              background={this.state.headerBackground}
+            />
+            <section className='w-full h-96 flex flex-grow bg-gray-700 '></section>
+            <HorizontalFooter
+              footerBorderRadius={this.state.footerBorderRadius}
+              footerPatternColor={this.state.footerPatternColor}
+              footerPattern={this.state.footerPattern}
+              button={this.state.button}
+              textColor={this.state.footerTextColor}
+              background={this.state.footerBackground}
+            />
+          </div>
+        )}
+        {this.state.vertical && (
+          <div
+            className='mx-auto w-1/2 horiz-templ flex rounded-2xl flex-col p-0 overflow-hidden'
+            style={{
+              backgroundColor: this.state.border.color,
+              fontFamily: this.state.fontFamily,
+              border: `${this.state.border.width}px solid ${this.state.border.color} `,
+            }}>
+            <VerticalBlock
+              headerBorderRadius={this.state.headerBorderRadius}
+              headerPatternColor={this.state.headerPatternColor}
+              headerPattern={this.state.headerPattern}
+              textColor={this.state.headerTextColor}
+              background={this.state.headerBackground}
+              button={this.state.button}
+            />
+          </div>
+        )}
         <TemplateEditor
           state={this.state}
+          changeTemplateType={this.changeTemplateType}
           saveEditingStep={this.saveEditingStep}
           stepBack={this.undoHistoryStep}
           changeHeaderBorderRadius={this.changeHeaderBorderRadius}

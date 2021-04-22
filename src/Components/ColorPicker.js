@@ -11,7 +11,9 @@ export default class ColorPicker extends Component {
     this.setState({ ...this.state, show: !this.state.show })
   }
   render() {
-    return (
+    return this.props.vertical ? (
+      ' '
+    ) : (
       <div className='w-full flex-col flex items-center relative'>
         <h3 className=''>{this.props.name}:</h3>
         <div className='p-1 w-3/4 h-10 bg-gray-400 border border-gray-800 rounded-md'>
