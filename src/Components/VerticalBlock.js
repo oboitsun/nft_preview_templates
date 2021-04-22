@@ -30,17 +30,17 @@ export default class VerticalBlock extends Component {
         style={{
           background: this.props.background,
           color: this.props.textColor,
-          bordertRadius: `${this.props.headerBorderRadius}px`,
-          borderRadius: `${this.props.headerBorderRadius}px`,
+          borderTopRightRadius: `${this.props.headerBorderRadius}px`,
+          borderBottomRightRadius: `${this.props.headerBorderRadius}px`,
         }}
         className='w-full h-full  flex  justify-between items-center relative overflow-hidden '>
-        <div className='w-1/2 h-full bg-gray-800 mr-2 z-10'></div>
-        <div className='w-1/2 h-full z-10  flex flex-col  justify-between ml-2 sm:py-12 sm:pr-10'>
-          <div className='flex'>
-            <div className='w-16 h-16 rounded-full bg-red-400 sm:mr-5 z-10'></div>
+        <div className='w-full h-full max-w-lg bg-gray-800 ml-8 mr-5 z-10'></div>
+        <div className='w-1/2 h-full z-10  flex flex-col  justify-between ml-2 sm:py-12 pr-2 sm:pr-5 lg:pr-10'>
+          <div className='flex items-center'>
+            <div className='w-10 h-10 rounded-full bg-red-400 sm:mr-5 z-10 flex-shrink-0'></div>
             <div className='flex flex-col items-start justify-between mr-auto z-10'>
-              <span className='text-2xl leading-none'>Olive Allen</span>
-              <span className='text-3xl leading-none'>“A piece of Something”</span>
+              <span className='text-2xl leading-none mix-blend-difference'>Olive Allen</span>
+              <span className='text-3xl text-left leading-none'>“A piece of Something”</span>
             </div>
           </div>
           <div className='flex items-center  z-10'>
@@ -81,6 +81,7 @@ export default class VerticalBlock extends Component {
               style={{
                 color: this.props.button.textColor,
                 background: this.props.button.background,
+                borderRadius: `${this.props.button.borderRadius}px`,
                 border: this.props.button.border
                   ? `${this.props.button.borderWidth} solid ${this.props.button.borderColor}`
                   : 'none',
@@ -96,8 +97,8 @@ export default class VerticalBlock extends Component {
         <div
           style={{
             ...patterns[this.props.headerPattern],
-            borderRadius: `${this.props.headerBorderRadius}px`,
-            borderRadius: `${this.props.headerBorderRadius}px`,
+            borderTopRightRadius: `${this.props.headerBorderRadius}px`,
+            borderBottomRightRadius: `${this.props.headerBorderRadius}px`,
           }}
           className='w-full h-full absolute left-0 top-0 z-0'></div>
       </div>

@@ -65,6 +65,7 @@ export default class HorizontalFooter extends Component {
             style={{
               color: this.props.button.textColor,
               background: this.props.button.background,
+              borderRadius: `${this.props.button.borderRadius}px`,
               border: this.props.button.border
                 ? `${this.props.button.borderWidth} solid ${this.props.button.borderColor}`
                 : 'none',

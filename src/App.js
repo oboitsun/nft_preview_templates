@@ -6,9 +6,9 @@ class App extends React.Component {
   render() {
     return (
       <>
-        <div style={{ position: 'absolute', top: 0, left: 0, color: 'white' }}>
+        {/* <div style={{ position: 'absolute', top: 0, left: 0, color: 'white' }}>
           {window.innerWidth}
-        </div>
+        </div> */}
         <div className='App py-5 lg:py-10'>
           <HorizontalTemplate />
         </div>
