@@ -31,7 +31,7 @@ export default class HorizontalHeader extends Component {
           borderTopRightRadius: `${this.props.headerBorderRadius}px`,
           borderTopLeftRadius: `${this.props.headerBorderRadius}px`,
         }}
-        className='w-full p-2 sm:py-12 sm:px-10 flex justify-between items-center relative '>
+        className='w-full p-2 lg:px-5 lg:py-6 2xl:py-12 2xl:px-10 flex justify-between items-center relative '>
         <div className='w-5 h-5 lg:w-16 lg:h-16 rounded-full bg-red-400 sm:mr-5 z-10'></div>
         <div className='flex flex-col items-start mr-auto z-10'>
           <span className='lg:text-2xl leading-none'>Olive Allen</span>

@@ -2,7 +2,10 @@ import React, { Component } from 'react'
 import TimeLeft from './icons/timeLeft'
 import Star from './icons/Star'
 export default class VerticalBlock extends Component {
-  render() {
+  constructor(props) {
+    super(props)
+  }
+  choosePattern = (where, color) => {
     const patterns = {
       flat: {
         opacity: 1,
@@ -11,38 +14,56 @@ export default class VerticalBlock extends Component {
 
       dotted: {
         opacity: 0.4,
-        backgroundImage: `radial-gradient(${this.props.headerPatternColor} 1px, transparent 1px), radial-gradient(${this.props.headerPatternColor} 1px, transparent 1px)`,
+        backgroundImage: `radial-gradient(${color} 1px, transparent 1px), radial-gradient(${color} 1px, transparent 1px)`,
         backgroundSize: '5px 5px',
         backgroundPosition: '0 0,2.5px 2.5px',
       },
       lined: {
         opacity: 0.4,
-        background: `repeating-linear-gradient( 45deg, ${this.props.headerPatternColor} , ${this.props.headerPatternColor} 2px, transparent 2px, transparent 10px)`,
+        background: `repeating-linear-gradient( 45deg, ${color} , ${color} 2px, transparent 2px, transparent 10px)`,
       },
       gradient: {
         opacity: 0.8,
-        backgroundImage: `linear-gradient(180deg, ${this.props.headerPatternColor} 0%, rgba(8,19,35,0) 100%)`,
+        backgroundImage: `linear-gradient(180deg, ${color} 0%, rgba(8,19,35,0) 100%)`,
       },
     }
-
+    return { ...patterns[where] }
+  }
+  render() {
+    const headerPattern = this.choosePattern(
+      this.props.headerPattern,
+      this.props.headerPatternColor
+    )
+    const sidePattern = this.choosePattern(this.props.sidePattern, this.props.sidePatternColor)
     return (
       <div
         style={{
           background: this.props.background,
+          // backgroundColor: this.props.state.border.color,
           color: this.props.textColor,
           borderTopRightRadius: `${this.props.headerBorderRadius}px`,
           borderBottomRightRadius: `${this.props.headerBorderRadius}px`,
+          // border: `${this.props.state.border.width}px solid ${this.props.state.border.color} `,
         }}
-        className='vertical-template   flex justify-between  relative overflow-hidden '>
-        <div style={{ background: this.props.sideBackground }} className='h-full w-1/12'></div>
-        <section className='vertical-ratio w-1/12 xl:w-12 flex mr-auto flex-shrink  bg-gray-700  z-10'>
+        className='vertical-template  relative overflow-hidden '>
+        <div style={{ background: this.props.sideBackground }} className='h-full w-full relative'>
+          <div
+            style={{
+              ...sidePattern,
+              // borderTopRightRadius: `${this.props.headerBorderRadius}px`,
+              // borderBottomRightRadius: `${this.props.headerBorderRadius}px`,
+            }}
+            className='w-full h-full absolute left-0 top-0 z-0'></div>
+        </div>
+        <section className='vertical-ratio w-full flex z-10 relative '>
           <iframe
+            title='vertical'
             className='absolute top-0 w-full h-full '
             src='https://www.youtube.com/embed/tCCY31XxN_Y'
             frameBorder='0'
             allowFullScreen=''></iframe>
         </section>
-        <div className='h-full z-10 w-1/2 flex flex-col items-start justify-between relative pl-2 2xl:pl-10 py-2 sm:py-12 '>
+        <div className='h-full z-10 flex flex-col items-start justify-between relative pl-2 2xl:pl-10 py-2 sm:py-12 '>
           <div className='flex items-center '>
             <div className='w-5 h-5 lg:w-10 lg:h-10 rounded-full bg-red-400 mr-1 lg:mr-2 2xl:mr-5 z-10 flex-shrink-0'></div>
             <div className='flex flex-col flex-wrap items-start justify-between mr-auto  z-10 pb-1'>
@@ -97,21 +118,21 @@ export default class VerticalBlock extends Component {
                   ? `${this.props.button.borderWidth} solid ${this.props.button.borderColor}`
                   : 'none',
               }}
-              className='uppercase outline-none border rounded-lg border-gray-900 py-1 px-3 2xl:py-5 2xl:px-10 tex-sm 2xl:text-base lg:font-semibold leading-none  mb-1 lg:mb-2'>
+              className='uppercase outline-none border rounded-lg z-10 border-gray-900 py-1 px-1 lg:py-2 lg:px-4 2xl:py-5 2xl:px-10 tex-sm 2xl:text-base lg:font-semibold leading-none  mb-1 lg:mb-2'>
               go to auction
             </button>
             <div className='flex items-center justify-end'>
-              <Star /> <span className='ml-2 font-semibold lg:text-xl'>@</span>
+              <Star /> <span className='ml-2 font-semibold text-sm lg:text-xl'>@</span>
             </div>
           </div>
+          <div
+            style={{
+              ...headerPattern,
+              borderTopRightRadius: `${this.props.headerBorderRadius}px`,
+              borderBottomRightRadius: `${this.props.headerBorderRadius}px`,
+            }}
+            className='w-full h-full absolute left-0 top-0 z-0'></div>
         </div>
-        <div
-          style={{
-            ...patterns[this.props.headerPattern],
-            borderTopRightRadius: `${this.props.headerBorderRadius}px`,
-            borderBottomRightRadius: `${this.props.headerBorderRadius}px`,
-          }}
-          className='w-full h-full absolute left-0 top-0 z-0'></div>
       </div>
     )
   }

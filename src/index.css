@@ -30,17 +30,29 @@ code {
 .horizontal-template {
   max-height: 900px;
   max-width: 900px;
+  width: 90vh;
+  height: 90vh;
 }
 .vertical-template {
   /* height: 100%; */
   width: 90vh;
-  height: 95vh;
+  height: 90vh;
+  max-width: 900px;
+  max-height: 900px;
+  display: grid;
+  row-gap: 0;
+  column-gap: 0;
+  grid-template-columns: 5% 55% 40%;
 }
 
 @media (max-width: 800px) {
   .vertical-template {
     /* height: 100%; */
     width: 90vw;
-    height: 95vw;
+    height: 90vw;
+  }
+  .horizontal-template {
+    max-height: 95vw;
+    max-width: 95vw;
   }
 }

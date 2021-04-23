@@ -2,7 +2,10 @@ import React from 'react'
 
 export default function Star() {
   return (
-    <svg className='w-5 h-5' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22.72 21.68'>
+    <svg
+      className='w-3 h-3 lg:w-5 lg:h-5'
+      xmlns='http://www.w3.org/2000/svg'
+      viewBox='0 0 22.72 21.68'>
       <defs>
         <style>{`.cls-1{fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.48px;}`}</style>
       </defs>

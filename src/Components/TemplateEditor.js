@@ -5,7 +5,7 @@ export default class TemplateEditor extends Component {
   render() {
     console.log('current state\n', this.props.state)
     return (
-      <div className='text-2xl  text-white flex  flex-col items-center  px-10  top-2 right-4'>
+      <div className='absolute text-2xl  text-white flex  flex-col items-center  px-10  top-2 right-4'>
         <div className='h-15 w-full flex mb-2'>
           {this.props.state.history.length > 0 ? (
             <button
@@ -98,20 +98,16 @@ export default class TemplateEditor extends Component {
             />
           </>
         )}
-        {!this.props.state.vertical && (
-          <>
-            <h3> Footer pattern:</h3>
-            <PatternLibrary
-              changeHeaderPattern={this.props.changeFooterPattern}
-              back={this.props.state.footerBackground}
-              color={this.props.state.footerPatternColor}
-            />
-          </>
-        )}
+
+        <h3>{this.props.state.vertical ? 'SidePattern' : 'Footer pattern:'}</h3>
+        <PatternLibrary
+          changeHeaderPattern={this.props.changeFooterPattern}
+          back={this.props.state.footerBackground}
+          color={this.props.state.footerPatternColor}
+        />
 
         <ColorPicker
-          vertical={this.props.state.vertical}
-          name='Footer Pattern Color'
+          name={this.props.state.vertical ? 'Side Pattern Color' : 'Footer Pattern Color'}
           currentState={this.props.state.footerPatternColor}
           function={this.props.changeFooterPatternColor}
         />

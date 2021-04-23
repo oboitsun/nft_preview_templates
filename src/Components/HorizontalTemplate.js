@@ -25,13 +25,13 @@ export default class HorizontalTemplate extends Component {
       footerBackground: 'yellow',
       border: {
         color: 'green',
-        width: 10,
+        width: 5,
       },
       button: {
         background: 'turquoise',
         border: true,
         borderColor: '#408ce0',
-        borderWidth: '5px',
+        borderWidth: '3px',
         borderRadius: 2,
         textColor: this.headerTextColor,
       },
@@ -218,7 +218,7 @@ export default class HorizontalTemplate extends Component {
   render() {
     /*horiz-templ is a custom selector put in index */
     return (
-      <div className='w-full h-full flex flex-col lg:flex-row'>
+      <div className='w-full h-full flex flex-col items-start relative lg:flex-row'>
         {!this.state.vertical && (
           <div className='w-full relative rounded-2xl overflow-hidden'>
             <div
@@ -256,13 +256,16 @@ export default class HorizontalTemplate extends Component {
         )}
         {this.state.vertical && (
           <div
-            className='vertical-template mx-auto h-auto max-h-full flex rounded-2xl flex-col p-0 overflow-hidden'
+            className='w-auto rounded-2xl overflow-hidden mx-auto '
             style={{
               backgroundColor: this.state.border.color,
               fontFamily: this.state.fontFamily,
               border: `${this.state.border.width}px solid ${this.state.border.color} `,
             }}>
             <VerticalBlock
+              state={this.state}
+              sidePatternColor={this.state.footerPatternColor}
+              sidePattern={this.state.footerPattern}
               headerBorderRadius={this.state.headerBorderRadius}
               headerPatternColor={this.state.headerPatternColor}
               headerPattern={this.state.headerPattern}
